@@ -1,0 +1,5 @@
+#spark config
+*.conf
+
+#log
+log4j.properties

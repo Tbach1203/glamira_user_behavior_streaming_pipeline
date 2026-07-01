@@ -1,8 +1,7 @@
 import os
-
 from pyspark.sql import SparkSession
-import util.config as conf
-from util.logger import Log4j
+import config.config as conf
+from config.logger import Log4j
 from pipelines.etl_pipeline import run_pipeline
 
 if __name__ == "__main__":

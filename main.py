@@ -18,8 +18,6 @@ if __name__ == "__main__":
     log = Log4j(spark)
     log.info("Spark application started.")
 
-    query = run_pipeline(
-        spark,
-        config.kafka_conf
-    )
-    query.awaitTermination()
+    queries = run_pipeline(spark,config.kafka_conf,config.input_conf)
+    for query in queries:
+        query.awaitTermination()

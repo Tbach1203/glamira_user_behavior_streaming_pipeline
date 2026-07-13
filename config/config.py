@@ -37,6 +37,7 @@ class Config:
         self.conf = conf
         self.spark_conf = self._get_spark_conf()
         self.kafka_conf = self._get_section_conf("KAFKA")
+        self.input_conf = self._get_input_conf()
 
     def _get_spark_conf(self):
         spark_conf = SparkConf()
@@ -51,3 +52,8 @@ class Config:
     def _get_section_conf(self, section: str) -> dict[str, str]:
         items = self.conf.items(section)
         return _handle_env(items)
+    
+    def _get_input_conf(self) -> dict[str, str]:
+        if not self.conf.has_section("INPUT"):
+            return {}
+        return self._get_section_conf("INPUT")

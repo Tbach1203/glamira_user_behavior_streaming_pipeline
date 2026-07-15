@@ -7,6 +7,7 @@ from pipelines.etl_pipeline import run_pipeline
 if __name__ == "__main__":
     base_dir = os.path.dirname(os.path.abspath(__file__))
     conf_path = base_dir + "/spark.conf"
+    # conf_path = base_dir + "/spark.local.conf"
     config = conf.Config(conf_path)
 
     spark = (
@@ -18,6 +19,5 @@ if __name__ == "__main__":
     log = Log4j(spark)
     log.info("Spark application started.")
 
-    queries = run_pipeline(spark,config.kafka_conf,config.input_conf)
-    for query in queries:
-        query.awaitTermination()
+    query = run_pipeline(spark,config.kafka_conf,config.input_conf)
+    query.awaitTermination()

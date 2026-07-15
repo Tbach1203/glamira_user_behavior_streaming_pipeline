@@ -1,9 +1,10 @@
 import pyspark.sql.functions as f
-
+from schema.schema_dim_product import product_schema
 
 def load_product_master(spark,product_file_path):
     return (
         spark.read
+        .schema(product_schema)
         .json(product_file_path)
         .select(
             "product_id",

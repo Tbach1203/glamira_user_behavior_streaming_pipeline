@@ -9,7 +9,6 @@ def build_dim_product(spark,raw_df,product_file_path):
         .filter(
             f.col("product_id").isNotNull()
         )
-        
     )
     product_master_df = load_product_master(
         spark,

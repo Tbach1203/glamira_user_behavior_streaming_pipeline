@@ -2,6 +2,7 @@ from etl.extract.kafka_producer import read_raw_stream
 from etl.transform.dim_browser import build_dim_browser
 from etl.transform.dim_product import build_dim_product
 from etl.transform.dim_location import build_dim_location
+from etl.transform.dim_date import build_dim_date
 
 def process_batch(spark, batch_df, batch_id, input_conf):
     print(f"PROCESS BATCH {batch_id}")
@@ -21,6 +22,10 @@ def process_batch(spark, batch_df, batch_id, input_conf):
     print("DIM_LOCATION")
     location_df.show(20, truncate=False)
 
+    date_df = build_dim_date(batch_df)
+    print("DIM_DATE")
+    date_df.show(truncate=False)
+
 
 def run_pipeline(spark, kafka_conf, input_conf):
     raw_df = read_raw_stream(spark, kafka_conf)
@@ -35,5 +40,4 @@ def run_pipeline(spark, kafka_conf, input_conf):
         .option("truncate", False)
         .start()
     )
-
     return query

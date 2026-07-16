@@ -8,12 +8,11 @@ def load_location_master(spark, location_file_path):
         .json(location_file_path)
         .select(
             "ip",
-            "country_name",
-            "region_name",
-            "city_name"
+            f.col("country").alias("country_name"),
+            f.col("region").alias("region_name"),
+            f.col("city").alias("city_name")
         )
     )
-
 
 def lookup_location(stream_df, location_master_df):
     return (

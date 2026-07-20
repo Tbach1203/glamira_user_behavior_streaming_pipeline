@@ -1,8 +1,6 @@
 import pyspark.sql.functions as f
 from schema.schema_dim_date import date_schema
-
 import pyspark.sql.functions as f
-
 
 def build_dim_date(raw_df):
     date_df = (

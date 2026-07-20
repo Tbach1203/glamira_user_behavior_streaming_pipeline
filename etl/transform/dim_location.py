@@ -1,7 +1,6 @@
 import pyspark.sql.functions as f
 from utils.location_mapping import (load_location_master,lookup_location)
 
-
 def build_dim_location(spark, raw_df, location_file_path):
     stream_location_df = (
         raw_df

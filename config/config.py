@@ -38,6 +38,7 @@ class Config:
         self.spark_conf = self._get_spark_conf()
         self.kafka_conf = self._get_section_conf("KAFKA")
         self.input_conf = self._get_input_conf()
+        self.postgres_conf = self._get_section_conf("POSTGRES")
 
     def _get_spark_conf(self):
         spark_conf = SparkConf()

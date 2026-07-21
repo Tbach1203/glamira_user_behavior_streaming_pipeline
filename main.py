@@ -19,5 +19,5 @@ if __name__ == "__main__":
     log = Log4j(spark)
     log.info("Spark application started.")
 
-    query = run_pipeline(spark,config.kafka_conf,config.input_conf)
+    query = run_pipeline(spark,config.kafka_conf,config.input_conf, config.postgres_conf)
     query.awaitTermination()

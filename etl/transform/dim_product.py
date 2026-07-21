@@ -10,14 +10,8 @@ def build_dim_product(spark,raw_df,product_file_path):
             f.col("product_id").isNotNull()
         )
     )
-    product_master_df = load_product_master(
-        spark,
-        product_file_path
-    )
-    product_df = lookup_product(
-        stream_product_df,
-        product_master_df
-    )
+    product_master_df = load_product_master(spark, product_file_path)
+    product_df = lookup_product(stream_product_df, product_master_df)
     product_df = (
         product_df
         .withColumn(
@@ -29,7 +23,7 @@ def build_dim_product(spark,raw_df,product_file_path):
         )
         .select(
             "product_key",
-            "product_id",
+            f.col("product_id").cast("long").alias("product_id"),
             f.col("name").alias("product_name"),
             f.col("price").alias("product_price")
         )

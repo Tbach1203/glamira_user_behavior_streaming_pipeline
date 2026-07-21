@@ -27,7 +27,7 @@ def build_fact_view_log(raw_df, browser_df, product_df, location_df, date_df):
             "browser_key",
             "location_key",
 
-            f.col("store_id"),
+            f.col("store_id").cast("int").alias("store_id"),
 
             f.col("referrer_url").alias(
                 "log_referrer_url"
